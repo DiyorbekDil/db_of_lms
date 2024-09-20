@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'assignments_submissions',
     'courses_enrollments',
     'students_teachers',
+    'departments_groups',
 ]
 
 MIDDLEWARE = [
