@@ -24,11 +24,26 @@ class StudentModel(Common):
         verbose_name_plural = 'Students'
 
 
+class DepartmentsModel(Common):
+    name = models.CharField(max_length=255, validators=[MinLengthValidator(8)])
+    established_at = models.DateField()
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Department'
+        verbose_name_plural = 'Departments'
+
+
 class TeachersModel(Common):
     first_name = models.CharField(max_length=64, validators=[MinLengthValidator(3)])
     last_name = models.CharField(max_length=64, validators=[MinLengthValidator(3)])
     password = models.CharField(max_length=255, unique=True)
-    department = models.CharField(max_length=128, validators=[MinLengthValidator(8)])
+
+    department = models.ForeignKey(DepartmentsModel, related_name='teacher',
+                                   on_delete=models.SET_NULL,
+                                   null=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
