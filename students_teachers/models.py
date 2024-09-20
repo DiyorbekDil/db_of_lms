@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinLengthValidator
+from departments_groups.models import DepartmentsModel, GroupsModel
 
 
 class Common(models.Model):
@@ -16,24 +17,15 @@ class StudentModel(Common):
     password = models.CharField(max_length=255, unique=True)
     enrollment_date = models.DateTimeField()
 
+    group = models.ForeignKey(GroupsModel, related_name='student',
+                              on_delete=models.SET_NULL, null=True)
+
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
     class Meta:
         verbose_name = 'Student'
         verbose_name_plural = 'Students'
-
-
-class DepartmentsModel(Common):
-    name = models.CharField(max_length=255, validators=[MinLengthValidator(8)])
-    established_at = models.DateField()
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'Department'
-        verbose_name_plural = 'Departments'
 
 
 class TeachersModel(Common):
