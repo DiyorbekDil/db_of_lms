@@ -1,6 +1,5 @@
 from django.db import models
 from django.core.validators import MinLengthValidator
-from courses_enrollments.models import StagesModel
 # Create your models here.
 
 
@@ -10,6 +9,18 @@ class Common(models.Model):
 
     class Meta:
         abstract = True
+
+
+class StagesModel(Common):
+    number = models.PositiveSmallIntegerField()
+    description = models.TextField()
+
+    def __str__(self):
+        return self.description
+
+    class Meta:
+        verbose_name = 'stage'
+        verbose_name_plural = 'stages'
 
 
 class DepartmentsModel(Common):

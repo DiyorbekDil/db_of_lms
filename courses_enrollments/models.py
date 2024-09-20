@@ -1,17 +1,6 @@
 from django.db import models
 from students_teachers.models import Common, TeachersModel, StudentModel
-
-
-class StagesModel(Common):
-    number = models.PositiveSmallIntegerField()
-    description = models.TextField()
-
-    def __str__(self):
-        return self.description
-
-    class Meta:
-        verbose_name = 'stage'
-        verbose_name_plural = 'stages'
+from departments_groups.models import StagesModel
 
 
 class CoursesModel(Common):
